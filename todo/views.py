@@ -31,5 +31,5 @@ class TodoListV(ListView):
 
 class TodoDeleteV(DeleteView):
     model = Todo
-    template_name = 'todo/todo_comfirm_delete.html'
+    template_name = 'todo/todo_confirm_delete.html'
     success_url = reverse_lazy('todo:list')
