@@ -14,8 +14,52 @@
 
         <title>Hello, world!</title>
     </head>
-    <body>
-    <h1>Hello, world!</h1>
+    <body style="padding-top:90px;">
+    <!-- Main Menu -->
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary fixed-top">
+
+        <span class="navbar-brand mx-5 mb-0 font-weight-bold font-italic">Vue-Django System</span>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item mx-1 btn btn-primary">
+                    <a class="nav-link text-white" href="#">Home</a></li>
+                <li class="nav-item mx-1 btn btn-primary">
+                    <a class="nav-link text-white" href="#">Todo</a></li>
+                <li class="nav-item mx-1 btn btn-primary">
+                    <a class="nav-link text-white" href="#">Blog(tobe)</a></li>
+
+                <li class="nav-item dropdown mx-1 btn btn-primary">
+                    <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">Util</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Admin</a>
+                        <div class="dropdown-divider"></div>
+                    </div>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            </form>
+
+            <ul class="navbar-nav ml-5 mr-5">
+                <li class="nav-item dropdown mx-1 btn btn-primary">
+                    <a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+                        <i class="fas fa-user"></i>&nbsp; Anonymous &nbsp;</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Login</a>
+                        <a class="dropdown-item" href="#">Register</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
 
     <div class="container">
         {% block content %}
