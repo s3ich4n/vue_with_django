@@ -21,6 +21,7 @@
             border-bottom: 1px solid #ddd;
             width: 70px;
             padding-left: 20px;
+            line-height: 20px;
         }
         .inputBox .item {
             border-style: none;
@@ -28,6 +29,7 @@
             width: 400px;
             margin-left: 50px;
             padding-left: 20px;
+            line-height: 20px;
         }
         .todoList {
             list-style: none;
@@ -63,7 +65,7 @@
         <input class="name" type="text" placeholder="name ..." v-model.trim="name">
         <input class="item" type="text" placeholder="type anything welcomed ..."
             v-model.trim="newTodoItem" v-on:keyup.enter="add_todo">
-        <button v-on:click="add_todo">ADD</button>
+        <button v-on:click="add_todo" class="btn btn-primary btn-sm">ADD</button>
     </div>
 
     <ul class="todoList">

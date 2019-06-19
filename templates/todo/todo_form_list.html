@@ -55,12 +55,15 @@
 {% endblock %}
 
 {% block content %}
+<!-- 두가지 뷰를 하나로 조합하는 mixin 이 필요하다. -->
+<!-- View 에서 Template 으로 넘겨야 할 변수도 점검 필요 -->
 <div id='app'>
 
     <h1>My Todo App !</h1>
     <strong>서로 할 일이나 의견을 공유해 봅시다.</strong>
     <br>
 
+    <!-- CreateView 기능은 여기서 -->
     <form class="inputBox" action="." method="post">
         {% csrf_token %}
         <input class="name" type="text" placeholder="이름" name="name">
@@ -68,6 +71,21 @@
             name="todo">
         <button type="submit" class="btn btn-info btn-sm">ADD</button>
     </form>
+
+    <!-- ListView 기능은 여기서 -->
+    <ul class="todoList">
+        <!--
+            ListView의 컨텍스트 변수는 object_list이다.
+            이건 어디서 넘겨주는 걸까?
+            MultipleObjectMixin에서 찾아올 수 있다.
+        -->
+        {% for todo in object_list %}
+        <li>
+            <span>{{ todo.name}}:: {{ todo.todo }}</span>
+            <span class="removeBtn"><a href="{% url 'todo:delete' todo.id%}">&#0007</a></span>
+        </li>
+        {% endfor %}
+    </ul>
 
 </div>
 {% endblock %}
