@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vue-Django ToDo App</title>
+{% extend 'base.html' %}
 
-    <style>
+{% block title %}vue_main.html{% endblock %}
+
+{% block extra-style %}
+<style>
         body {
             text-align: center;
             background-color: #ddd;
@@ -52,66 +50,66 @@
 
         [v-cloak] {display: none;}
     </style>
-</head>
+{% endblock %}
 
-<body>
-    <div id='app' v-cloak>
+{% block content %}
+<div id='app' v-cloak>
 
-        <h1>My Todo App !</h1>
-        <strong>서로 할 일이나 의견을 공유해 봅시다.</strong>
-        <br>
+    <h1>My Todo App !</h1>
+    <strong>서로 할 일이나 의견을 공유해 봅시다.</strong>
+    <br>
 
-        <div class="inputBox">
-            <input class="name" type="text" placeholder="name ..." v-model.trim="name">
-            <input class="item" type="text" placeholder="type anything welcomed ..."
-                v-model.trim="newTodoItem" v-on:keyup.enter="add_todo">
-            <button v-on:click="add_todo">ADD</button>
-        </div>
-    
-        <ul class="todoList">
-            <li v-for="(todoItem, index) in todoItems">
-                <span>{todoItem.name}::: {todoItem.item}</span>
-                <span class="removeBtn" v-on:click.stop="remove_todo(todoItem, index)">&#x00D7</span>
-            </li>
-        </ul>
-
+    <div class="inputBox">
+        <input class="name" type="text" placeholder="name ..." v-model.trim="name">
+        <input class="item" type="text" placeholder="type anything welcomed ..."
+            v-model.trim="newTodoItem" v-on:keyup.enter="add_todo">
+        <button v-on:click="add_todo">ADD</button>
     </div>
 
-    <script src='https://unpkg.com/vue/dist/vue.min.js'></script>
-    <script>
-        var vm = new Vue({
-            delimiters: ['{', '}'],
-            el: '#app',
-            data: {
-                name: '',
-                newTodoItem: '',
-                todoItems: [
-                    {name: 'a', item: 'aaa'},
-                    {name: 'b', item: 'bbb'},
-                    {name: 'c', item: 'ccc'},
-                    {name: 'd', item: 'ddd'},
-                ],
-            },
-            methods: {
-                add_todo: function() {
-                    console.log('name:', this.name, this.newTodoItem);
-                    if (this.newTodoItem == '') return;
-                    if (this.name == '') this.name = 'no name';
+    <ul class="todoList">
+        <li v-for="(todoItem, index) in todoItems">
+            <span>{todoItem.name}::: {todoItem.item}</span>
+            <span class="removeBtn" v-on:click.stop="remove_todo(todoItem, index)">&#x00D7</span>
+        </li>
+    </ul>
 
-                    this.todoItems.push({'name':this.name, 'item':this.newTodoItem});
-                    this.clear_input();
-                },
-                remove_todo: function(todoItem, index) {
-                    console.log(todoItem);
-                    this.todoItems.splice(index, 1);
-                },
-                clear_input: function() {
-                    this.name = '';
-                    this.newTodoItem = '';
-                },
-            },
-        })
-    </script>
+</div>
+{% endblock %}
 
-</body>
-</html>
+{% block extra-script %}
+<script src='https://unpkg.com/vue/dist/vue.min.js'></script>
+<script>
+    var vm = new Vue({
+        delimiters: ['{', '}'],
+        el: '#app',
+        data: {
+            name: '',
+            newTodoItem: '',
+            todoItems: [
+                {name: 'a', item: 'aaa'},
+                {name: 'b', item: 'bbb'},
+                {name: 'c', item: 'ccc'},
+                {name: 'd', item: 'ddd'},
+            ],
+        },
+        methods: {
+            add_todo: function() {
+                console.log('name:', this.name, this.newTodoItem);
+                if (this.newTodoItem == '') return;
+                if (this.name == '') this.name = 'no name';
+
+                this.todoItems.push({'name':this.name, 'item':this.newTodoItem});
+                this.clear_input();
+            },
+            remove_todo: function(todoItem, index) {
+                console.log(todoItem);
+                this.todoItems.splice(index, 1);
+            },
+            clear_input: function() {
+                this.name = '';
+                this.newTodoItem = '';
+            },
+        },
+    })
+</script>
+{% endblock %}
