@@ -48,7 +48,7 @@ class TodoDeleteV(DeleteView):
 # self.object_list를 해당 class-based views에 추가해둬야 사용가능하다.
 class TodoMOMCV(MultipleObjectMixin, CreateView):
     model = Todo
-    fields = '__all__' # 필드속성
+    fields = '__all__'  # 필드속성
     template_name = 'todo/todo_form_list.html'
     success_url = reverse_lazy('todo:mixin')
 
@@ -65,5 +65,14 @@ class TodoMOMCV(MultipleObjectMixin, CreateView):
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        self.object_list = self.get_queryset()
-        return super().get(request, *args, **kwargs)
+        self.object_list = self.get_queryset
+        return super().post(request, *args, **kwargs)
+
+
+class TodoDeleteV2(DeleteView):
+    model = Todo
+    # template_name = 'todo/todo_confirm_delete.html'
+    success_url = reverse_lazy('todo:mixin')
+
+    def get(self, request, *args, **kwargs):
+        return self.delete(self, request, *args, **kwargs)

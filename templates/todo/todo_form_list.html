@@ -59,8 +59,8 @@
 <!-- View 에서 Template 으로 넘겨야 할 변수도 점검 필요 -->
 <div id='app'>
 
-    <h1>My Todo App !</h1>
-    <strong>서로 할 일이나 의견을 공유해 봅시다.</strong>
+    <h1>테스트중</h1>
+    <strong>테스트중</strong>
     <br>
 
     <!-- CreateView 기능은 여기서 -->
@@ -81,8 +81,8 @@
         -->
         {% for todo in object_list %}
         <li>
-            <span>{{ todo.name}}:: {{ todo.todo }}</span>
-            <span class="removeBtn"><a href="{% url 'todo:delete' todo.id%}">&#0007</a></span>
+            <span>{{ todo.name }}:: {{ todo.todo }}</span>
+            <span class="removeBtn"><a href="{% url 'todo:delete2' todo.id %}">&#x00D7</a></span>
         </li>
         {% endfor %}
     </ul>

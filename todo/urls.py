@@ -10,4 +10,6 @@ urlpatterns = [
     path('<int:pk>/delete/', views.TodoDeleteV.as_view(), name='delete'),
 
     path('mixin/', views.TodoMOMCV.as_view(), name='mixin'),
+    path('<int:pk>/v2/delete/', views.TodoDeleteV2.as_view(), name='delete2'),
+
 ]
