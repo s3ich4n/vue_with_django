@@ -4,6 +4,11 @@ from django.views.generic.list import MultipleObjectMixin
 
 from todo.models import Todo
 
+
+class TodoVueOnly(TemplateView):
+    template_name = 'todo/todo_vue_only.html'
+
+
 """
 RedirectView 를 제외한 모든 뷰가 template_name 이 있다.
 CreateView 는:
@@ -69,6 +74,8 @@ class TodoMOMCV(MultipleObjectMixin, CreateView):
         return super().post(request, *args, **kwargs)
 
 
+# 실제 Django에서는 페이지 이동이 일어나고 있다.
+# 이것이 Vue.js 와 Django의 가장 큰 차이 중 하나
 class TodoDeleteV2(DeleteView):
     model = Todo
     # template_name = 'todo/todo_confirm_delete.html'

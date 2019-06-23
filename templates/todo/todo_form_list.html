@@ -50,6 +50,15 @@
         font-size: 20px;
     }
 
+    .removeBtn:hover {
+        color: red;
+    }
+
+    .modal-footer a {
+        color: white;
+    }
+
+
     [v-cloak] {display: none;}
 </style>
 {% endblock %}
@@ -82,10 +91,47 @@
         {% for todo in object_list %}
         <li>
             <span>{{ todo.name }}:: {{ todo.todo }}</span>
-            <span class="removeBtn"><a href="{% url 'todo:delete2' todo.id %}">&#x00D7</a></span>
+            <span class="removeBtn" data-toggle="modal" data-target="#myModal"
+                  data-id="{{ todo.id }}" data-name="{{ todo.name }}" data-todo="{{ todo.todo }}">&#x00D7</span>
+{#            <a href="{% url 'todo:delete2' todo.id %}"></a>#}
+
         </li>
         {% endfor %}
     </ul>
 
+    <!-- Modal -->
+    <div class="modal" id="myModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">정말 삭제하시겠습니까?</h5>
+                </div>
+                <div class="modal-body">
+                    body-text
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">취소</button>
+                    <button type="button" class="btn btn-danger btn-sm">
+                        <a href="">지우기</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
+{% endblock %}
+
+{% block extra-script %}
+<script>
+$('#myModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // related target으로 id, name, todo를 사용하고있다.
+    var id = button.data('id')
+    var name = button.data('name')
+    var todo = button.data('todo')
+
+    var modal = $(this)
+    modal.find('.modal-body').text(name + '::: ' + todo) // name, todo는 여기서 응용하는 중... body 내용은 이것.
+    modal.find('.modal-footer a').attr('href', '/todo/' + id + '/delete2/') // a 태그의 경로는 이것.
+})
+</script>
 {% endblock %}
